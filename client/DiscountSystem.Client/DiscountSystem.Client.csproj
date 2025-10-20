@@ -7,15 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Google.Protobuf" Version="3.33.0" />
-		<PackageReference Include="Grpc.Core.Api" Version="2.71.0" />
-		<PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\src\DiscountSystem.Protos\DiscountSystem.Protos.csproj" />
-	</ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DiscountSystem.Protos\DiscountSystem.Protos.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -20,6 +20,6 @@ var genResponse = await client.GenerateDiscountCodesAsync(new GenerateDiscountCo
 Console.WriteLine($"Generation success: {genResponse.Result}");
 
 // Use a discount code, update codeToUse with good/actual code
-string codeToUse = "LMSRQC9R";
+string codeToUse = " ";
 var useResponse = await client.UseDiscountCodeAsync(new UseDiscountCodeRequest { Code = codeToUse });
 Console.WriteLine($"Use result: {useResponse.Result}");
