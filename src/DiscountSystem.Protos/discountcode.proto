@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+
+option csharp_namespace = "DiscountSystem.Protos";
+
+enum EnumUseDiscountCode {
+    success = 0;    missing = 1;    used = 2;    invalid = 3;
+}
+
+message GenerateDiscountCodeRequest {
+  int32 count = 1;    // number of codes to generate
+  int32 length = 2;   // length of each code
+}
+
+message GenerateDiscountCodeResponse {
+  bool result = 1;
+  string message = 2;
+}
+
+message UseDiscountCodeRequest {
+  string code = 1;
+}
+
+message UseDiscountCodeResponse {
+  EnumUseDiscountCode result = 1;
+}
+
+service DiscountService {
+  rpc GenerateDiscountCodes (GenerateDiscountCodeRequest) returns (GenerateDiscountCodeResponse);
+  rpc UseDiscountCode (UseDiscountCodeRequest) returns (UseDiscountCodeResponse);
+}
