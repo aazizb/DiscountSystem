@@ -2,4 +2,5 @@
   <Project Path="src/DiscountSystem.Domain/DiscountSystem.Domain.csproj" Id="15eda6cf-e565-4118-915b-bf9807a4f256" />
   <Project Path="src/DiscountSystem.Infrastructure/DiscountSystem.Infrastructure.csproj" Id="6329b985-5abf-4f94-a8b5-f14a9d302a5b" />
   <Project Path="src/DiscountSystem.Protos/DiscountSystem.Protos.csproj" Id="7f3ba784-6cf3-4da8-aef9-18fb3a6f02bd" />
+  <Project Path="src/DiscountSystem.Services/DiscountSystem.Services.csproj" Id="765d04f5-173c-4c7d-9ce1-486b8238f4fa" />
 </Solution>
