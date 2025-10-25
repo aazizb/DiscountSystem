@@ -1,0 +1,56 @@
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: discount_sql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Uddito.Damal03
+    ports:
+      - "1433:1433"
+    networks:
+      - discount-net
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P Uddito.Damal03 -Q 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build:
+      context: .
+      dockerfile: src/DiscountSystem.Server/Dockerfile
+    container_name: discount_server
+    ports:
+      - "5001:5001"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=DiscountDb;User Id=sa;Password=Uddito.Damal03;TrustServerCertificate=True
+      - ASPNETCORE_URLS=https://+:5001
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Uddito.Damal03
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    volumes:
+      - ./aspnetapp.pfx:/https/aspnetapp.pfx:ro
+    networks:
+      - discount-net
+
+  client:
+    build:
+      context: .
+      dockerfile: client/DiscountSystem.Client/Dockerfile
+    container_name: discount_client
+    depends_on:
+      - server
+    networks:
+      - discount-net
+    environment:
+      - GRPC_SERVER_URL=https://server:5001
+    volumes:
+      - ./aspnetapp.pfx:/https/aspnetapp.pfx:ro
+
+networks:
+  discount-net:
+    driver: bridge
